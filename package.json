@@ -1,0 +1,28 @@
+{
+  "name": "mpcode-manage",
+  "version": "1.0.0",
+  "description": "微信小程序自动化构建，生成预览测试，提交发版，项目文件脚本分析等",
+  "main": "index.js",
+  "scripts": {
+    "client-install": "cd client & npm install",
+    "server-install": "cd server & npm install",
+    "client": "npm start --prefix client",
+    "server": "nodemon ./server/src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/csonchen/mpcode-manage.git"
+  },
+  "keywords": [
+    "小程序自动化构建",
+    "react",
+    "nodejs",
+    "express"
+  ],
+  "author": "csonchen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/csonchen/mpcode-manage/issues"
+  },
+  "homepage": "https://github.com/csonchen/mpcode-manage#readme"
+}

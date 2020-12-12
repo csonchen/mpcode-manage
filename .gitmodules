@@ -1,0 +1,3 @@
+[submodule "wx-mall-components"]
+	path = wx-mall-components
+	url = https://github.com/csonchen/wx-mall-components.git
