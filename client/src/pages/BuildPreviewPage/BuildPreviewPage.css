@@ -1,0 +1,17 @@
+.form-item {
+  margin-bottom: 1rem;
+}
+
+.mpCodeImg {
+  width: 200px;
+  height: 200px;
+}
+
+.flexMiddle {
+  display: flex;
+  align-items: center;
+}
+
+.spinBtn {
+  margin-right: 3px; 
+}

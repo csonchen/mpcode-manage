@@ -1,10 +1,10 @@
 import React from 'react'
-import { Button, Col, Form, Spinner } from 'react-bootstrap'
-import './styles/bootstrap.mini.css';
-import './App.css';
-import { postData } from './services/request';
+import { Col, Form } from 'react-bootstrap'
+import LoadingButton from '../../components/LoadingButton/LoadingButton';
+import { postData } from '../../services/request';
+import './BuildPreviewPage.css';
 
-export default class App extends React.Component {
+export default class BuildPreviewPage extends React.Component {
   pagePath = 'pages/index/index'
   searchQuery = ''
 
@@ -12,19 +12,19 @@ export default class App extends React.Component {
     isLoading: false,
     previewCodeImg: '',
     selectPages: [],
+    scenes: [],
+    envs: [],
   }
-
   componentDidMount() {
     this.fetchAllPages()
   }
-  /**
-   * 获取小程序项目的所有页面
-   */
   fetchAllPages = () => {
-    postData('/api/getAppPages').then(res => {
-      const { pages } = res.data
+    postData('/api/build/getAppInfo').then(res => {
+      const { pages, scenes, envs } = res.data
       this.setState({
         selectPages: pages,
+        scenes,
+        envs,
       })
     })
   }
@@ -32,7 +32,7 @@ export default class App extends React.Component {
     this.setState({ isLoading: true })
 
     // 请求生成预览码接口
-    postData('/api/preview', {
+    postData('/api/build/preview', {
       method: 'POST',
       params: {
         pagePath: this.pagePath,
@@ -59,20 +59,24 @@ export default class App extends React.Component {
 
     return (
       <div>
-        <h3>自动化构建微信小程序服务</h3>
-        <h6>项目：微信小程序商城组件库</h6>
-        <h6>
-          项目地址：
-          <a href="https://github.com/csonchen/wx-mall-components" target="_">
-            https://github.com/csonchen/wx-mall-components
-          </a>
-        </h6>
-        <br />
         <Form.Group>
+          <Form.Row className="form-item justify-content-md-center">
+            <Form.Label column lg={1}>启动环境</Form.Label>
+            <Col className="flex-middle">
+              {this.state.envs.map((env, index) => (
+              <Form.Check 
+                key={index} 
+                inline 
+                type="radio" 
+                label={env.label} 
+                name="buildEnv" 
+                id={`env-${env.id}`} 
+              />
+              ))}
+            </Col>
+          </Form.Row>
           <Form.Row className="form-item">
-            <Form.Label column lg={2}>
-              启动页面
-            </Form.Label>
+            <Form.Label column lg={1}>启动页面</Form.Label>
             <Col>
               <Form.Control list="pages" type="text" placeholder="如：pages/index/index" onChange={this.onPagePathChange} />
               <datalist id="pages">
@@ -83,9 +87,18 @@ export default class App extends React.Component {
             </Col>
           </Form.Row>
           <Form.Row className="form-item">
-            <Form.Label column lg={2}>
-              启动参数
-            </Form.Label>
+            <Form.Label column lg={1}>进入场景</Form.Label>
+            <Col>
+              <Form.Control list="scenes" type="text" placeholder="默认" onChange={this.onPagePathChange} />
+              <datalist id="scenes">
+                {this.state.scenes.map(item => (
+                <option key={item.id}>{item.id}: {item.desc}</option>
+                ))}
+              </datalist>
+            </Col>
+          </Form.Row>
+          <Form.Row className="form-item">
+            <Form.Label column lg={1}>启动参数</Form.Label>
             <Col>
               <Form.Control type="text" placeholder="如：name=sam&age=18" onChange={this.onQueryChange}/>
             </Col>
@@ -93,18 +106,7 @@ export default class App extends React.Component {
         </Form.Group>
   
         <div className="flexMiddle">
-          <Button 
-            className="flexMiddle"
-            variant="primary" 
-            onClick={!isLoading ? this.buildPreviewCode : null}
-            disabled={isLoading}
-          >
-            {isLoading && 
-            <Spinner className="spinBtn" as="span" animation="border" size="sm" role="status" aria-hidden="true"/>
-            }
-            <span>点击构建并生成预览码</span>
-          </Button>
-
+          <LoadingButton loading={isLoading} onClick={this.buildPreviewCode}>点击构建并生成预览码</LoadingButton>
           {previewCodeImg &&
           <img className="mpCodeImg" src={previewCodeImg} alt="" />
           }
