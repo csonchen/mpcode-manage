@@ -4,7 +4,7 @@
 
 ## 运行
 
-````
+```shell
 # init submodule（引入wx-mall-components小程序项目，作为自动化构建的原始项目）
 git submodule update --init --recursive
 
@@ -20,4 +20,4 @@ npm run server-install
 # run start
 npm run client
 npm run server
-````
+```
