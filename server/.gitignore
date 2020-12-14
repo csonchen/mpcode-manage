@@ -3,4 +3,3 @@ node_modules/*
 
 # keys & config
 src/keys/*
-config.js
