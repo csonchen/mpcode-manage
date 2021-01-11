@@ -3,7 +3,13 @@ const router = express.Router();
 const path = require('path');
 const { analyseImages, analyseComponents } = require('../services/analyseApi');
 const ObjectsToCsv = require('objects-to-csv');
-const { image, component, HOST } = require('../config');
+const {
+  ['wx-mall-components']: {
+    image,
+    component,
+    HOST,
+  }
+} = require('../config')
 
 router.get('/images', (req, res) => {
   const { entry, sources } = image

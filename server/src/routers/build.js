@@ -4,31 +4,15 @@ const path = require('path');
 const fs = require('fs');
 const ci = require('miniprogram-ci');
 const { scenes } = require('../constant/scene');
-const { APP_ID } = require('../config');
-const config = require('../config');
-
-const ENVS = [
-  {
-    id: 'dev',
-    label: '开发',
-    value: 'DEV'
-  },
-  {
-    id: 'test',
-    label: '测试',
-    value: 'TEST',
-  },
-  {
-    id: 'uat',
-    label: '预发布',
-    value: 'UAT',
-  },
-  {
-    id: 'prod',
-    label: '生产',
-    value: 'PROD',
+const { 
+  ENVS,
+  ['wx-mall-components']: {
+    APP_ID,
+    projectPath,
+    privateKeyPath,
+    HOST,
   }
-]
+} = require('../config');
 
 // 获取小程序初始配置（页面，场景值）
 router.get('/getAppInfo', (req, res) => {
@@ -70,8 +54,8 @@ router.post('/preview', async (req, res) => {
   const project = new ci.Project({
     appid: APP_ID,
     type: 'miniProgram',
-    projectPath: 'wx-mall-components/dist',
-    privateKeyPath: 'server/src/keys/private.wx5a35be4e15614ade.key',
+    projectPath,
+    privateKeyPath,
     ignores: ['node_modules/**/*'],
   })
   const { 
@@ -97,7 +81,7 @@ router.post('/preview', async (req, res) => {
     code: 200,
     message: '操作成功',
     data: {
-      previewImg: `${config.HOST}/static/preview.jpg`,
+      previewImg: `${HOST}/static/preview.jpg`,
     }
   })
 })
