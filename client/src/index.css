@@ -37,8 +37,17 @@ code {
 .bd-sidebar {
   position: sticky;
   z-index: 1000;
-  height: calc(100vh - 4rem);
   border-right: 1px solid #ececec;
+}
+
+@media (min-width: 768px) {
+  .bd-sidebar {
+    position: -webkit-sticky;
+    position: sticky;
+    z-index: 1000;
+    height: calc(100vh - 4rem);
+    border-right: 1px solid rgba(0,0,0,0.1);
+  }
 }
 
 .side-nav {
@@ -46,11 +55,11 @@ code {
   width: 100%;
 }
 
-
 /* distance */
 .mr10 {
   margin-right: 10px;
 }
+
 .mr3 {
   margin-right: 3px;
 }
