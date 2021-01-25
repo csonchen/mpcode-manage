@@ -1,6 +1,6 @@
 import React from 'react'
 import { Col, Form } from 'react-bootstrap'
-import LoadingButton from '../../components/LoadingButton/LoadingButton';
+import { LoadingButton } from '../../components'
 import { postData } from '../../services/request';
 import './BuildPreviewPage.css';
 

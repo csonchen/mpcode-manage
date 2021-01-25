@@ -1,9 +1,7 @@
 import React from 'react'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { Container, Col, Row } from 'react-bootstrap'
-import CSBody from '../../components/CSBody/CSBody'
-import CSHeader from '../../components/CSHeader/CSHeader'
-import CSSidebar from '../../components/CSSidebar/CSSidebar'
+import { CSBody, CSHeader, CSSidebar } from '../../components'
 
 export default class IndexPage extends React.Component {
   render() {

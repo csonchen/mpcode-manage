@@ -1,7 +1,7 @@
 import React from 'react'
 import { Form, Col, DropdownButton, Dropdown } from 'react-bootstrap'
 import AutoTable from '../../components/AutoTable/AutoTable'
-import LoadingButton from '../../components/LoadingButton/LoadingButton'
+import { LoadingButton } from '../../components'
 import { postData } from '../../services/request'
 
 export default class AnalyseImagesPage extends React.Component {

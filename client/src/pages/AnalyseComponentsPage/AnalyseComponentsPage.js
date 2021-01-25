@@ -1,8 +1,9 @@
 import React from 'react'
 import { Col, Form } from 'react-bootstrap'
 import AutoTable from '../../components/AutoTable/AutoTable'
-import LoadingButton from '../../components/LoadingButton/LoadingButton'
+import { LoadingButton } from '../../components'
 import { postData } from '../../services/request'
+
 export default class AnalyseComponentsPage extends React.Component {
   originTableList = []
   state = {
